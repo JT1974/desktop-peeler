@@ -8,6 +8,18 @@ if ! xcrun --find swiftc >/dev/null 2>&1; then
     exit 1
 fi
 
+# Every build gets the next build number (kept in Info.plist, shown in the About window and
+# in the disk image name). The version itself (CFBundleShortVersionString) is raised by hand.
+# Every build must be described in RELEASE_NOTES.md first.
+VERSION="$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' Info.plist)"
+BUILD=$(( $(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' Info.plist) + 1 ))
+if ! grep -qxF "## $VERSION (build $BUILD)" RELEASE_NOTES.md; then
+    echo "RELEASE_NOTES.md has no entry '## $VERSION (build $BUILD)'. Describe this build there first, then run the build again."
+    exit 1
+fi
+/usr/libexec/PlistBuddy -c "Set CFBundleVersion $BUILD" Info.plist
+echo "Version $VERSION (build $BUILD)"
+
 APP="build/Desktop Peeler.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources/Fonts" "$APP/Contents/Resources/Languages" build/arch
 

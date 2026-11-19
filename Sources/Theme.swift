@@ -35,6 +35,14 @@ enum Brand {
     static let line2 = themed(dark: rgb(160, 200, 255, 0.16), light: rgb(5, 7, 13, 0.14))
     static let line3 = themed(dark: rgb(160, 200, 255, 0.34), light: rgb(5, 7, 13, 0.30))
 
+    // Disabled controls: a darker shade of the control's own background, with its own
+    // readable text colour (no transparency, so the label stays legible).
+    static let accentOffBg = themed(dark: rgb(27, 101, 119), light: rgb(31, 127, 147))
+    static let accentOffText = themed(dark: rgb(212, 243, 250), light: rgb(255, 255, 255))
+    static let ghostOffBg = themed(dark: rgb(7, 10, 20), light: rgb(227, 232, 240))
+    static let ghostOffText = themed(dark: rgb(140, 153, 181), light: rgb(86, 99, 124))
+    static let ghostOffLine = themed(dark: rgb(160, 200, 255, 0.20), light: rgb(5, 7, 13, 0.18))
+
     // Shapes
     static let radiusSmall: CGFloat = 10
 
@@ -69,16 +77,19 @@ struct AccentButtonStyle: ButtonStyle {
 private struct AccentButtonBody: View {
     let configuration: ButtonStyleConfiguration
     @Environment(\.isEnabled) private var isEnabled
+    @State private var hovering = false
 
     var body: some View {
         configuration.label
             .font(Brand.strong(13))
-            .foregroundColor(Brand.onAccent)
+            .foregroundColor(isEnabled ? Brand.onAccent : Brand.accentOffText)
             .padding(.horizontal, 18)
             .padding(.vertical, 8)
-            .background(Capsule().fill(Brand.accent))
-            .opacity(isEnabled ? (configuration.isPressed ? 0.75 : 1.0) : 0.3)
+            .background(Capsule().fill(isEnabled ? Brand.accent : Brand.accentOffBg))
+            .brightness(isEnabled && hovering && !configuration.isPressed ? 0.07 : 0)
+            .opacity(isEnabled && configuration.isPressed ? 0.75 : 1.0)
             .contentShape(Capsule())
+            .hoverCursor(hovering: $hovering)
     }
 }
 
@@ -92,17 +103,121 @@ struct GhostButtonStyle: ButtonStyle {
 private struct GhostButtonBody: View {
     let configuration: ButtonStyleConfiguration
     @Environment(\.isEnabled) private var isEnabled
+    @State private var hovering = false
+
+    private var fill: Color {
+        if !isEnabled { return Brand.ghostOffBg }
+        return configuration.isPressed || hovering ? Brand.surface2 : Brand.surface
+    }
 
     var body: some View {
         configuration.label
             .font(Brand.strong(13))
-            .foregroundColor(Brand.text)
+            .foregroundColor(isEnabled ? Brand.text : Brand.ghostOffText)
             .padding(.horizontal, 16)
             .padding(.vertical, 7)
-            .background(Capsule().fill(configuration.isPressed ? Brand.surface2 : Brand.surface))
-            .overlay(Capsule().stroke(Brand.line3, lineWidth: 1))
-            .opacity(isEnabled ? 1.0 : 0.4)
+            .background(Capsule().fill(fill))
+            .overlay(Capsule().stroke(isEnabled ? (hovering ? Brand.text2 : Brand.line3) : Brand.ghostOffLine, lineWidth: 1))
             .contentShape(Capsule())
+            .hoverCursor(hovering: $hovering)
+    }
+}
+
+// MARK: - Mouse cursor
+
+/// Pointing hand over an enabled control, "not allowed" (circle with a slash) over a
+/// disabled one. Apply it inside the control's own view (a button style body or a
+/// button label) so that it sees the control's enabled state. SwiftUI's own hover does not
+/// fire on disabled controls, so an AppKit tracking area is used instead.
+private final class CursorTrackingView: NSView {
+    var cursor: NSCursor = .pointingHand {
+        didSet { if pushed { cursor.set() } }
+    }
+    var onHover: ((Bool) -> Void)?
+    private var pushed = false
+    private var area: NSTrackingArea?
+
+    override func hitTest(_ point: NSPoint) -> NSView? { return nil }
+
+    override func updateTrackingAreas() {
+        super.updateTrackingAreas()
+        if let area = area { removeTrackingArea(area) }
+        let new = NSTrackingArea(rect: .zero,
+                                 options: [.mouseEnteredAndExited, .cursorUpdate, .activeInKeyWindow, .inVisibleRect],
+                                 owner: self, userInfo: nil)
+        addTrackingArea(new)
+        area = new
+    }
+
+    override func mouseEntered(with event: NSEvent) {
+        enter()
+    }
+
+    override func mouseExited(with event: NSEvent) {
+        leave()
+    }
+
+    override func cursorUpdate(with event: NSEvent) {
+        cursor.set()
+    }
+
+    override func viewWillMove(toWindow newWindow: NSWindow?) {
+        if newWindow == nil { leave() }
+        super.viewWillMove(toWindow: newWindow)
+    }
+
+    private func enter() {
+        if !pushed {
+            cursor.push()
+            pushed = true
+        }
+        cursor.set()
+        onHover?(true)
+    }
+
+    private func leave() {
+        if pushed {
+            NSCursor.pop()
+            pushed = false
+        }
+        onHover?(false)
+    }
+}
+
+private struct CursorArea: NSViewRepresentable {
+    let enabled: Bool
+    let onHover: (Bool) -> Void
+
+    func makeNSView(context: Context) -> CursorTrackingView {
+        let view = CursorTrackingView()
+        update(view)
+        return view
+    }
+
+    func updateNSView(_ view: CursorTrackingView, context: Context) {
+        update(view)
+    }
+
+    private func update(_ view: CursorTrackingView) {
+        view.cursor = enabled ? .pointingHand : .operationNotAllowed
+        view.onHover = onHover
+    }
+}
+
+private struct HoverCursorModifier: ViewModifier {
+    @Environment(\.isEnabled) private var isEnabled
+    var hovering: Binding<Bool>?
+
+    func body(content: Content) -> some View {
+        content.overlay(CursorArea(enabled: isEnabled, onHover: { value in
+            DispatchQueue.main.async { hovering?.wrappedValue = value }
+        }))
+    }
+}
+
+extension View {
+    func hoverCursor(hovering: Binding<Bool>? = nil) -> some View {
+        return modifier(HoverCursorModifier(hovering: hovering))
     }
 }
 
@@ -123,22 +238,23 @@ private struct BrandCheckboxBody: View {
             HStack(spacing: 8) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
-                        .fill(Brand.bg)
+                        .fill(isEnabled ? Brand.bg : Brand.ghostOffBg)
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
-                        .stroke(configuration.isOn ? Brand.accentText : Brand.line3, lineWidth: 1.5)
+                        .stroke(!isEnabled ? Brand.ghostOffLine : (configuration.isOn ? Brand.accentText : Brand.line3), lineWidth: 1.5)
                     if configuration.isOn {
                         Image(systemName: "checkmark")
                             .font(.system(size: 10, weight: .bold))
-                            .foregroundColor(Brand.accentText)
+                            .foregroundColor(isEnabled ? Brand.accentText : Brand.ghostOffText)
                     }
                 }
                 .frame(width: 17, height: 17)
                 configuration.label
+                    .foregroundColor(isEnabled ? nil : Brand.ghostOffText)
             }
             .contentShape(Rectangle())
+            .hoverCursor()
         }
         .buttonStyle(.plain)
-        .opacity(isEnabled ? 1.0 : 0.35)
     }
 }
 
@@ -251,6 +367,7 @@ struct ThemeSwitch: View {
                 .background(Capsule().fill(isOn ? Brand.surface2 : Color.clear))
                 .overlay(Capsule().stroke(isOn ? Brand.line2 : Color.clear, lineWidth: 1))
                 .contentShape(Capsule())
+                .hoverCursor()
         }
         .buttonStyle(.plain)
         .help(help)

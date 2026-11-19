@@ -50,6 +50,7 @@ struct HelpView: View {
                         topicCard(entry.element)
                     }
                     aboutCard
+                    UpdateCard()
                 }
             }
         }
@@ -79,13 +80,18 @@ struct HelpView: View {
 
     private var aboutCard: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(L("About Desktop Peeler")).font(Brand.strong(14))
+            HStack {
+                Text(L("About Desktop Peeler")).font(Brand.strong(14))
+                Spacer()
+                Text(AppVersion.display).font(Brand.mono(11)).foregroundColor(Brand.text2)
+            }
             Text(AboutPanel.summary)
                 .foregroundColor(Brand.text2)
                 .fixedSize(horizontal: false, vertical: true)
             HStack(spacing: 14) {
                 Link("presoft.hu/desktop-peeler", destination: AboutPanel.productURL)
                     .foregroundColor(Brand.accentText)
+                    .hoverCursor()
                 Spacer()
                 Button(L("About Desktop Peeler")) { AboutPanel.show() }
                     .buttonStyle(GhostButtonStyle())

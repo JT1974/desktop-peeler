@@ -42,6 +42,7 @@ struct SettingsView: View {
             .pickerStyle(.segmented)
             .labelsHidden()
             .fixedSize()
+            .hoverCursor()
         }
         .brandCard()
     }
@@ -63,6 +64,7 @@ struct SettingsView: View {
             }
             .labelsHidden()
             .fixedSize()
+            .hoverCursor()
             HStack(spacing: 10) {
                 Button(L("Add language file…")) { importLanguage() }
                     .buttonStyle(GhostButtonStyle())

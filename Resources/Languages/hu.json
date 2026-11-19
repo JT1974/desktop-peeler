@@ -277,6 +277,27 @@
     "Processes using the most memory": "A legtöbb memóriát használó folyamatok",
     "This session": "Ez a munkamenet",
     "Everything Desktop Peeler changed since it was opened.": "Minden, amit a Desktop Peeler a megnyitása óta módosított.",
-    "No changes made yet.": "Még nem történt módosítás."
+    "No changes made yet.": "Még nem történt módosítás.",
+    "Version %@ (build %d)": "%@ verzió (build %d)",
+    "The downloaded file is damaged (checksum does not match). Try again.": "A letöltött fájl sérült (az ellenőrző összeg nem egyezik). Próbáld újra.",
+    "Updates": "Frissítések",
+    "Checking for updates…": "Frissítések keresése…",
+    "A new version is available: %@": "Új verzió érhető el: %@",
+    "Download update": "Frissítés letöltése",
+    "Downloading %@… %d%%": "%@ letöltése… %d%%",
+    "Version %@ is downloaded to your Downloads folder.": "A(z) %@ verzió letöltődött a Letöltések mappába.",
+    "What to do now:": "Teendőd most:",
+    "Click “Quit and open disk image”. Desktop Peeler closes, because a running app cannot be replaced.": "Kattints a „Kilépés és lemezkép megnyitása” gombra. A Desktop Peeler bezárul, mert futó alkalmazást nem lehet lecserélni.",
+    "In the window that opens, drag Desktop Peeler onto the Applications folder.": "A megnyíló ablakban húzd a Desktop Peelert az Applications (Alkalmazások) mappára.",
+    "When macOS asks, choose Replace.": "Amikor a macOS rákérdez, válaszd a Csere (Replace) lehetőséget.",
+    "Eject the disk image, then start Desktop Peeler from the Applications folder. Your settings are kept.": "Told ki a lemezképet, majd indítsd a Desktop Peelert az Alkalmazások mappából. A beállításaid megmaradnak.",
+    "If macOS blocks the first start, allow it in System Settings › Privacy & Security › Open Anyway.": "Ha a macOS letiltja az első indítást, engedélyezd a Rendszerbeállítások › Adatvédelem és biztonság › Megnyitás mindenképp menüpontban.",
+    "Quit and open disk image": "Kilépés és lemezkép megnyitása",
+    "Show in Finder": "Megjelenítés a Finderben",
+    "Check for updates": "Frissítések keresése",
+    "Check for updates…": "Frissítések keresése…",
+    "Checking for updates did not succeed.": "A frissítések keresése nem sikerült.",
+    "The download did not succeed. Try again.": "A letöltés nem sikerült. Próbáld újra.",
+    "The installed version is the latest.": "A jelenlegi verzió az aktuális."
   }
 }

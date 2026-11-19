@@ -29,7 +29,7 @@ Last updated: 2026-11-16 (documentation and screenshots for the presoft.hu produ
 | `Sources/Localization.swift` | `L()`/`N()` translation lookup, language file loading, import and removal |
 | `Resources/Languages` | `en.json` (template, generated) and `hu.json` |
 | `tools/update-language-template.py` | Regenerates `en.json` from the sources, reports missing translations |
-| `make-dmg.sh` | Builds the app and the drag-to-Applications disk image `build/DesktopPeeler-<version>.dmg` |
+| `make-dmg.sh` | Builds the app and the drag-to-Applications disk image `build/DesktopPeeler-<version>-build<n>.dmg` |
 | `Sources/Theme.swift` | presoft brand skin: colours, fonts, button, checkbox and card styles |
 | `Resources/Fonts` | Sora, Inter, JetBrains Mono (SIL Open Font License) |
 | `Resources/AppIcon.iconset` | App icon PNGs (concept 3, peeler tool) |

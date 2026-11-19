@@ -15,7 +15,7 @@ The script compiles the app into `build/Desktop Peeler.app` and shows it in Find
 
     bash make-dmg.sh
 
-Builds the app and packs it into `build/DesktopPeeler-<version>.dmg`. Open the disk image and drag Desktop Peeler onto the Applications shortcut. The app is ad-hoc signed only: on another Mac, macOS blocks the first launch; allow it in System Settings › Privacy & Security › Open Anyway. Signing and notarization need an Apple Developer ID.
+Builds the app and packs it into `build/DesktopPeeler-<version>-build<n>.dmg`. Open the disk image and drag Desktop Peeler onto the Applications shortcut. The app is ad-hoc signed only: on another Mac, macOS blocks the first launch; allow it in System Settings › Privacy & Security › Open Anyway. Signing and notarization need an Apple Developer ID.
 
 ## What it does
 

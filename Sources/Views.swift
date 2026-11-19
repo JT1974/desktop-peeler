@@ -16,6 +16,10 @@ struct DesktopPeelerApp: App {
         .commands {
             CommandGroup(replacing: .appInfo) {
                 Button(L("About Desktop Peeler")) { AboutPanel.show() }
+                Button(L("Check for updates…")) {
+                    state.pane = .help
+                    UpdateChecker.shared.check()
+                }
             }
             CommandGroup(replacing: .appSettings) {
                 Button(L("Settings…")) { state.pane = .settings }
@@ -164,6 +168,7 @@ struct ContentView: View {
                     .stroke(isOn ? Brand.line2 : Color.clear, lineWidth: 1)
             )
             .contentShape(Rectangle())
+            .hoverCursor()
         }
         .buttonStyle(.plain)
     }
@@ -382,6 +387,7 @@ struct CategoryBlock: View {
                         .foregroundColor(Brand.text2)
                         .frame(width: 18, height: 18)
                         .contentShape(Rectangle())
+                        .hoverCursor()
                 }
                 .buttonStyle(.plain)
                 .disabled(category.items.isEmpty)
@@ -410,6 +416,7 @@ struct CategoryBlock: View {
                             .foregroundColor(Brand.text2)
                         Button(action: { NSWorkspace.shared.activateFileViewerSelecting([item.url]) }) {
                             Image(systemName: "magnifyingglass").foregroundColor(Brand.muted)
+                                .hoverCursor()
                         }
                         .buttonStyle(.plain)
                         .help(L("Show in Finder: ") + item.url.path)
@@ -621,6 +628,7 @@ struct ChecksView: View {
                     Spacer()
                     Button(action: { NSWorkspace.shared.activateFileViewerSelecting([finding.url]) }) {
                         Image(systemName: "magnifyingglass").foregroundColor(Brand.muted)
+                            .hoverCursor()
                     }
                     .buttonStyle(.plain)
                     .help(L("Show in Finder: ") + finding.url.path)
