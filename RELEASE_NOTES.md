@@ -26,7 +26,6 @@ First published build. It is released on GitHub under the tag `v1.0.0-build2`, w
 
 ### Known issues
 - The app has no Apple Developer ID signature and is not notarized. macOS blocks the first launch; verify the checksum, then allow it in System Settings › Privacy & Security › Open Anyway.
-- “Check for updates” reports that the check did not succeed until the product page is live at presoft.hu.
 
 ## 1.0.0 (build 1)
 *2026-11-18*

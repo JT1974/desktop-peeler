@@ -56,7 +56,7 @@ Last updated: 2026-11-24 (first published build: 1.0.0 build 2, GitHub release `
 - The new features are not tested by hand yet (see above).
 - macOS can only revoke the System Events and Finder automation permissions together (tccutil); one at a time only in System Settings. The Downloads-folder permission state cannot be read without macOS asking, so no status is shown for it.
 - The .dmg is ad-hoc signed: other Macs block the first launch until allowed in System Settings › Privacy & Security.
-- "Check for updates" fails until the product page (with `desktop-peeler/latest.json`) is live at presoft.hu; on 2026-11-24 the domain still shows the coming-soon page.
+- `https://presoft.hu/desktop-peeler/latest.json` and the .dmg are live since 2026-11-24, served next to the coming-soon page until the full website launches; "Check for updates" reads them.
 - Releasing: build with `make-dmg.sh`, commit, tag that commit `v<version>-build<n>`, attach the .dmg to a GitHub release with its SHA-256, then update the website's `src/data/desktop-peeler.ts` (the site build stops if the checksum does not match the file).
 - Background items that apps register directly with macOS cannot be listed or removed; the app only opens System Settings › Login Items.
 - The "orphaned preference files" check is a heuristic based on the vendor prefix of the bundle ID.
