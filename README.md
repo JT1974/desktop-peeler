@@ -44,7 +44,13 @@ Builds the app and packs it into `build/DesktopPeeler-<version>-build<n>.dmg`. O
 
 ## Download
 
-The ready-made app is available only on the product page, https://presoft.hu/desktop-peeler, after accepting the terms below.
+The ready-made disk image is on the [Releases](https://github.com/JT1974/desktop-peeler/releases) page and on the product page, https://presoft.hu/desktop-peeler. Each release tag marks the exact source the disk image was built from.
+
+**The app is not signed with an Apple Developer ID and is not notarized.** macOS cannot confirm where the file comes from, so check it yourself before you open it:
+
+    shasum -a 256 ~/Downloads/DesktopPeeler-<version>-build<n>.dmg
+
+The result must match the SHA-256 value in the release notes and on the product page. If it differs, delete the file. By downloading you accept the terms below.
 
 ## License and disclaimer
 

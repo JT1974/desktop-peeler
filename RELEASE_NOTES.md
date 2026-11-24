@@ -11,6 +11,23 @@ Rules:
 - When the version changes, the build number keeps counting up; it is never reset.
 - The product page publishes this list and the latest version at `latest.json` (see `Sources/Updates.swift`).
 
+## 1.0.0 (build 2)
+*2026-11-24*
+
+Disk image: `DesktopPeeler-1.0.0-build2.dmg`
+
+First published build. It is released on GitHub under the tag `v1.0.0-build2`, which marks the exact source it was built from, and on the product page.
+
+### Bug fixes and enhancements
+- Fixed the Help answer about data and the internet: it now says that the app connects only when you choose “Check for updates”, and what it reads then.
+
+### Security
+- Added a SHA-256 checksum for the disk image, published on the GitHub release and on the product page. “Check for updates” compares a downloaded update with the checksum in `latest.json`.
+
+### Known issues
+- The app has no Apple Developer ID signature and is not notarized. macOS blocks the first launch; verify the checksum, then allow it in System Settings › Privacy & Security › Open Anyway.
+- “Check for updates” reports that the check did not succeed until the product page is live at presoft.hu.
+
 ## 1.0.0 (build 1)
 *2026-11-18*
 

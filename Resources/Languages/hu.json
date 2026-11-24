@@ -188,7 +188,7 @@
     "Is it safe to delete caches?": "Biztonságos törölni a gyorsítótárakat?",
     "Caches are copies that apps can recreate. Quit the app first; an app that is running may misbehave until restarted.": "A gyorsítótárak másolatok, amelyeket az alkalmazások újra létre tudnak hozni. Előbb lépj ki az alkalmazásból; egy futó alkalmazás újraindításig rendellenesen működhet.",
     "Does Desktop Peeler run in the background or send data anywhere?": "Fut a Desktop Peeler a háttérben, vagy küld bárhová adatot?",
-    "No. It works only while it is open, and it does not connect to the internet.": "Nem. Csak akkor dolgozik, amikor nyitva van, és nem kapcsolódik az internethez.",
+    "No. It works only while it is open. It connects to the internet only when you choose “Check for updates”: it then reads the latest version details from presoft.hu and, if you ask for it, downloads the new disk image. It sends no data about you or your Mac.": "Nem. Csak akkor dolgozik, amikor nyitva van. Az internethez csak akkor kapcsolódik, ha a „Frissítések keresése” parancsot választod: ilyenkor a presoft.hu-ról beolvassa a legfrissebb verzió adatait, és ha kéred, letölti az új lemezképet. Rólad és a Macedről semmilyen adatot nem küld.",
     "Should I give it Full Disk Access?": "Adjak neki teljes lemezhozzáférést?",
     "Optional. With it the scan sees more folders. Without it the app still works.": "Nem kötelező. Vele a keresés több mappát lát. Nélküle is működik az alkalmazás.",
     "This is not a Desktop Peeler language file. It needs “code”, “name” and “strings” entries.": "Ez nem Desktop Peeler nyelvfájl. „code”, „name” és „strings” bejegyzések kellenek bele.",

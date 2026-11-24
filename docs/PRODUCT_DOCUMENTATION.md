@@ -1,6 +1,6 @@
 # Desktop Peeler – product documentation
 
-Version described: 1.0 (build 1), source state of 2026-11-16. Bundle ID `hu.presoft.desktoppeeler`. Minimum macOS 12.0. Product page: https://presoft.hu/desktop-peeler
+Version described: 1.0.0 (build 2), source state of 2026-11-24 (tag `v1.0.0-build2`). Bundle ID `hu.presoft.desktoppeeler`. Minimum macOS 12.0. Product page: https://presoft.hu/desktop-peeler
 
 **Purpose of this file.** It is the single reference for (a) the product page on presoft.hu, (b) the in-app help and About window, and (c) store listing and submission material. Sections 1–5 describe what the app does today and are the source of truth for any copy. Section 6 is the in-app help text. Section 7 is the About content and the visual identity. Section 8 covers distribution (download from the product page only) and why the Mac App Store is not used. Section 10 is the material for the product page: key messages and the screenshots in `screenshots/`.
 
@@ -16,7 +16,7 @@ The window has a top bar (app icon, name, theme switch), a sidebar and a status 
 
 The app speaks English and Hungarian and follows the Mac's language by default; further languages can be added as files. It follows the Mac's light or dark appearance by default.
 
-The app collects no data, has no account, no network features, no analytics, no ads and no background component. It does nothing when it is not open.
+The app collects no data, has no account, no analytics, no ads and no background component. Its only network feature is "Check for updates", which runs only when the user chooses it: it reads `https://presoft.hu/desktop-peeler/latest.json` and, on request, downloads the new disk image. It does nothing when it is not open.
 
 ---
 
@@ -129,7 +129,7 @@ The key on the left is the English text, the value is the translation; placehold
 
 ### 2.9 Installation
 
-`make-dmg.sh` produces `build/DesktopPeeler-1.0.dmg` (about 1.4 MB). The app in it is universal: it runs natively on Intel and Apple-chip Macs, without Rosetta. The user opens it and drags Desktop Peeler onto the Applications shortcut. The app is only ad-hoc signed for now: on a Mac other than the one that built it, macOS blocks the first launch until the user allows it in System Settings › Privacy & Security › Open Anyway. Signing and notarization need an Apple Developer ID (section 8.2). The `.dmg` is offered only on the product page, behind the download confirmation (section 10.5). Uninstalling: drag the app to the Trash; its settings are in `~/Library/Preferences/hu.presoft.desktoppeeler.plist` and added languages in `~/Library/Application Support/Desktop Peeler/`.
+`make-dmg.sh` produces `build/DesktopPeeler-<version>-build<n>.dmg` (about 1.5 MB). The app in it is universal: it runs natively on Intel and Apple-chip Macs, without Rosetta. The user opens it and drags Desktop Peeler onto the Applications shortcut. The app is only ad-hoc signed for now: on a Mac other than the one that built it, macOS blocks the first launch until the user allows it in System Settings › Privacy & Security › Open Anyway. Signing and notarization need an Apple Developer ID (section 8.2). The `.dmg` is offered on the product page, behind the download confirmation (section 10.5), and as a GitHub release whose tag marks the exact source it was built from. Both show the same SHA-256 checksum. Uninstalling: drag the app to the Trash; its settings are in `~/Library/Preferences/hu.presoft.desktoppeeler.plist` and added languages in `~/Library/Application Support/Desktop Peeler/`.
 
 ---
 
@@ -279,7 +279,7 @@ Then press Add language file… and choose the file. Texts that are missing stay
 
 **Is it safe to delete caches?** Caches are copies that apps can recreate. Quit the app first; an app that is running may misbehave until restarted.
 
-**Does Desktop Peeler run in the background or send data anywhere?** No. It works only while it is open, and it does not connect to the internet.
+**Does Desktop Peeler run in the background or send data anywhere?** No. It works only while it is open. It connects to the internet only when you choose “Check for updates”: it then reads the latest version details from presoft.hu and, if you ask for it, downloads the new disk image. It sends no data about you or your Mac.
 
 **Should I give it Full Disk Access?** Optional. With it the scan sees more folders. Without it the app still works.
 
@@ -297,7 +297,7 @@ Then press Add language file… and choose the file. Texts that are missing stay
 | Developer | presoft |
 | Copyright | © 2026 presoft (from `Info.plist`); the legal name, Takács János e.v. (presoft.hu), appears only in legal documents (licence, terms, privacy) |
 | Support | **[CONFIRM support URL or address]** |
-| Privacy | "Desktop Peeler collects no data and makes no network connections." plus link to the privacy policy **[CONFIRM URL]** |
+| Privacy | "Desktop Peeler collects no data. It connects to the internet only when you choose Check for updates." plus link to the privacy policy **[CONFIRM URL]** |
 | Requirements | macOS 12 or later |
 | Languages | English, Hungarian; more can be added as files |
 | Acknowledgements | Fonts: Sora, Inter and JetBrains Mono, each under the SIL Open Font License (license texts are in the app bundle). No other third-party code. |
@@ -428,7 +428,7 @@ Field limits marked "verify" were not confirmed against Apple's reference pages 
 > • A session log records everything that was changed
 >
 > PRIVATE BY DESIGN
-> No account, no ads, no tracking, no network connections. Desktop Peeler works only while it is open and only in the folders you allow.
+> No account, no ads, no tracking. It connects to the internet only when you choose Check for updates. Desktop Peeler works only while it is open and only in the folders you allow.
 
 Do not use claims such as "speeds up your Mac", "boosts performance" or "removes malware" in any copy: the app does not measure or guarantee them, and guideline 2.3 requires metadata to reflect the app accurately.
 
@@ -443,7 +443,7 @@ The app collects no data: answer "Data Not Collected". No tracking. No third-par
 >
 > Desktop Peeler is published by Takács János e.v. (presoft.hu), [address], contact: [contact].
 >
-> **Data we collect.** None. Desktop Peeler does not collect, store or transmit personal data. It has no account, no analytics, no advertising and makes no network connections.
+> **Data we collect.** None. Desktop Peeler does not collect, store or transmit personal data. It has no account, no analytics and no advertising. It connects to the internet only when you choose Check for updates; that request reads a file from presoft.hu and carries no data about you or your Mac.
 >
 > **Data processed on your Mac.** To do its work the app reads the names, sizes and dates of files in the folders it scans, and the list of programs that start automatically. This information stays on your Mac, is shown only to you, and is discarded when you quit the app. The app stores only its own settings (theme, language, remembered approvals) on your Mac.
 >
@@ -481,7 +481,7 @@ Use these, in this order of weight; every claim is backed by sections 2–4.
 4. **It spots leftovers.** Broken links, startup entries of removed apps, settings files of apps that seem to be uninstalled.
 5. **Troubleshooting in one click, with the command shown.** Flush DNS, free inactive memory, reset Quick Look, rebuild Spotlight; the memory list explains each process.
 6. **You decide how much it asks.** "Don't ask again" per kind of action, every permission listed and revocable in Settings.
-7. **Private.** No account, no tracking, no internet connection; it runs only while open.
+7. **Private.** No account, no tracking; it connects to the internet only when the user chooses "Check for updates"; it runs only while open.
 8. **Native and bilingual.** Mac app for macOS 12 or later, Hungarian and English, light and dark appearance.
 9. **Free and open source.** MIT license, source code on GitHub. Provided as is; use at your own risk.
 
@@ -512,7 +512,7 @@ App icon for the page: `00-app-icon.png` (1024 × 1024 px, same as `Resources/Ap
 | | |
 |---|---|
 | Platform | macOS 12 Monterey or later, Intel and Apple chip (universal app; tested on Intel, not yet run on an Apple-chip Mac) |
-| Download | `DesktopPeeler-1.0.dmg`, about 1.4 MB, drag-to-Applications, only from this page after accepting the terms (10.5) **[CONFIRM: hosting and whether it is signed/notarized first]** |
+| Download | `DesktopPeeler-<version>-build<n>.dmg`, about 1.5 MB, drag-to-Applications, from this page after accepting the terms (10.5) or from the GitHub release; published unsigned, with a SHA-256 checksum and a red warning (decided 2026-11-24) |
 | Languages | Hungarian, English (more can be added) |
 | Price | Free |
 | License | MIT, open source; use at your own risk |

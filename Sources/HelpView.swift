@@ -154,7 +154,7 @@ struct HelpView: View {
                 (L("Is it safe to delete caches?"),
                  L("Caches are copies that apps can recreate. Quit the app first; an app that is running may misbehave until restarted.")),
                 (L("Does Desktop Peeler run in the background or send data anywhere?"),
-                 L("No. It works only while it is open, and it does not connect to the internet.")),
+                 L("No. It works only while it is open. It connects to the internet only when you choose “Check for updates”: it then reads the latest version details from presoft.hu and, if you ask for it, downloads the new disk image. It sends no data about you or your Mac.")),
                 (L("Should I give it Full Disk Access?"),
                  L("Optional. With it the scan sees more folders. Without it the app still works."))
             ])

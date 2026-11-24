@@ -2,7 +2,7 @@
 
 The project folder on the iMac is `Desktop/Work/desktop-peeler`.
 
-Last updated: 2026-11-16 (documentation and screenshots for the presoft.hu product page)
+Last updated: 2026-11-24 (first published build: 1.0.0 build 2, GitHub release `v1.0.0-build2` with SHA-256 checksum; published unsigned by the owner's decision)
 
 ## Where things stand
 
@@ -56,6 +56,8 @@ Last updated: 2026-11-16 (documentation and screenshots for the presoft.hu produ
 - The new features are not tested by hand yet (see above).
 - macOS can only revoke the System Events and Finder automation permissions together (tccutil); one at a time only in System Settings. The Downloads-folder permission state cannot be read without macOS asking, so no status is shown for it.
 - The .dmg is ad-hoc signed: other Macs block the first launch until allowed in System Settings › Privacy & Security.
+- "Check for updates" fails until the product page (with `desktop-peeler/latest.json`) is live at presoft.hu; on 2026-11-24 the domain still shows the coming-soon page.
+- Releasing: build with `make-dmg.sh`, commit, tag that commit `v<version>-build<n>`, attach the .dmg to a GitHub release with its SHA-256, then update the website's `src/data/desktop-peeler.ts` (the site build stops if the checksum does not match the file).
 - Background items that apps register directly with macOS cannot be listed or removed; the app only opens System Settings › Login Items.
 - The "orphaned preference files" check is a heuristic based on the vendor prefix of the bundle ID.
 - The Trash is emptied only after a cleanup with "Empty Trash afterwards" ticked; it is not scanned or sized.
