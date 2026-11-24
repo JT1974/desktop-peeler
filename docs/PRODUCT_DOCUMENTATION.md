@@ -1,6 +1,6 @@
 # Desktop Peeler – product documentation
 
-Version described: 1.0.0 (build 2), source state of 2026-11-24 (tag `v1.0.0-build2`). Bundle ID `hu.presoft.desktoppeeler`. Minimum macOS 12.0. Product page: https://presoft.hu/desktop-peeler
+Version described: 1.0.0 (build 3), source state of 2026-11-24 (tag `v1.0.0-build3`). Bundle ID `hu.presoft.desktoppeeler`. Minimum macOS 12.0. Product page: https://presoft.hu/desktop-peeler
 
 **Purpose of this file.** It is the single reference for (a) the product page on presoft.hu, (b) the in-app help and About window, and (c) store listing and submission material. Sections 1–5 describe what the app does today and are the source of truth for any copy. Section 6 is the in-app help text. Section 7 is the About content and the visual identity. Section 8 covers distribution (download from the product page only) and why the Mac App Store is not used. Section 10 is the material for the product page: key messages and the screenshots in `screenshots/`.
 
@@ -489,7 +489,7 @@ Avoid: "speeds up your Mac", "boosts performance", "removes viruses", "safe to d
 
 ### 10.2 Screenshots
 
-All are real captures of the app (version 1.0; checked against 1.0.0 build 2 on 2026-11-24: the captured views are unchanged, the new version line and Updates card sit at the bottom of the Help pane, outside the capture; Hungarian, dark theme unless noted), filled with **sample data**: the user is a made-up "anna", the files, apps and sizes are examples, not a real Mac. Window captures are 2560 × 1600 px (16:10, retina, 1280 × 800 pt window) PNG with transparent rounded corners and no shadow; add a shadow in CSS if wanted.
+All are real captures of the app (version 1.0; checked against 1.0.0 build 3 on 2026-11-24: the captured views are unchanged, the new version line and Updates card sit at the bottom of the Help pane, outside the capture; Hungarian, dark theme unless noted), filled with **sample data**: the user is a made-up "anna", the files, apps and sizes are examples, not a real Mac. Window captures are 2560 × 1600 px (16:10, retina, 1280 × 800 pt window) PNG with transparent rounded corners and no shadow; add a shadow in CSS if wanted.
 
 | File | Shows | Suggested caption (HU) |
 |---|---|---|

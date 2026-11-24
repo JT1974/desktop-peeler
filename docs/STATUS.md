@@ -2,7 +2,7 @@
 
 The project folder on the iMac is `Desktop/Work/desktop-peeler`.
 
-Last updated: 2026-11-24 (first published build: 1.0.0 build 2, GitHub release `v1.0.0-build2` with SHA-256 checksum; published unsigned by the owner's decision)
+Last updated: 2026-11-24 (published build: 1.0.0 build 3, GitHub release `v1.0.0-build3` with SHA-256 checksum; build 2 was withdrawn because its cleanup stalled on system-protected temporary items; published unsigned by the owner's decision; owner tested build 3 by hand on Intel)
 
 ## Where things stand
 
