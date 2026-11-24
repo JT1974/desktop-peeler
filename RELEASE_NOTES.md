@@ -11,6 +11,15 @@ Rules:
 - When the version changes, the build number keeps counting up; it is never reset.
 - The product page publishes this list and the latest version at `latest.json` (see `Sources/Updates.swift`).
 
+## 1.0.0 (build 3)
+*2026-11-24*
+
+Disk image: `DesktopPeeler-1.0.0-build3.dmg`
+
+### Bug fixes and enhancements
+- Fixed a cleanup that never finished: a few folders in the temporary folder are protected by macOS itself (System Integrity Protection) and cannot be removed even with the administrator password. They were offered under “Temporary files” and handed to Finder, which asked for the password and then never completed, so the app stayed on “Working…”. Such items are no longer offered, and are never handed to Finder.
+- Added `tools/run-tests.sh`, a read-only check that reproduces this problem.
+
 ## 1.0.0 (build 2)
 *2026-11-24*
 

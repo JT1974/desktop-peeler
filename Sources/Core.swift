@@ -241,7 +241,8 @@ enum CleanupScanner {
     private static func children(of root: URL) -> [URL] {
         let urls = try? FileManager.default.contentsOfDirectory(
             at: root, includingPropertiesForKeys: [.contentModificationDateKey], options: [])
-        return urls ?? []
+        // Items macOS itself protects can never be removed, so they are not offered.
+        return (urls ?? []).filter { !Remover.isSystemProtected($0) }
     }
 
     private static func isOlder(_ url: URL, thanDays days: Int) -> Bool {
@@ -266,6 +267,15 @@ struct RemovalReport {
 }
 
 enum Remover {
+    /// True for items under System Integrity Protection (file flags "restricted" or "sunlnk",
+    /// for example some com.apple.* folders in the user's temporary folder). Nobody can remove
+    /// them, not even with the administrator password; asked to, Finder never finishes.
+    static func isSystemProtected(_ url: URL) -> Bool {
+        var info = stat()
+        guard lstat(url.path, &info) == 0 else { return false }
+        return info.st_flags & UInt32(SF_RESTRICTED | SF_NOUNLINK) != 0
+    }
+
     /// Moves the given items to the Trash. Items the current user may not move are
     /// handed to Finder, which asks for the administrator password itself.
     static func moveToTrash(_ urls: [URL]) -> RemovalReport {
@@ -276,6 +286,10 @@ enum Remover {
         for url in urls {
             // attributesOfItem does not follow symlinks, so broken links are still found.
             if (try? fm.attributesOfItem(atPath: url.path)) == nil { continue }
+            if isSystemProtected(url) {
+                report.failed.append(url.path)
+                continue
+            }
             do {
                 try fm.trashItem(at: url, resultingItemURL: nil)
                 report.trashed.append(url.path)
